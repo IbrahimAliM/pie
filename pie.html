@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pop-up with Toastify</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <style>
+    #popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      z-index: 9999;
+    }
+
+    #popup p {
+      margin-bottom: 10px;
+    }
+
+    #popup button {
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="myChart"></canvas>
+  <button id="showPopupButton">Show Popup</button>
+  <button id="openGitHubButton">Open GitHub</button>
+  <button id="openTwitterButton">Open Twitter</button>
+
+  <div id="popup">
+    <p>This is a popup message.</p>
+    <button id="closePopupButton">Close</button>
+  </div>
+
+  <script>
+    // بيانات الأسرى في فلسطين المحتلة
+    var data = {
+      labels: ['الأسرى المحكومين', 'الأسرى المعتقلين بدون محاكمة', 'الأسرى المحتجزين بدون تهمة'],
+      datasets: [{
+        data: [3000, 2000, 1000],
+        backgroundColor: ['#ff6384', '#36a2eb', '#ffce56']
+      }]
+    };
+
+    // تهيئة القطاع الدائري
+    var options = {
+      responsive: true
+    };
+
+    // إنشاء القطاع الدائري
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var pieChart = new Chart(ctx, {
+      type: 'pie',
+      data: data,
+      options: options
+    });
+
+    // عرض الـ popup عند الضغط على الزر
+    var showPopupButton = document.getElementById('showPopupButton');
+    var popup = document.getElementById('popup');
+    var closePopupButton = document.getElementById('closePopupButton');
+
+    showPopupButton.addEventListener('click', function() {
+      popup.style.display = 'block';
+      Toastify({
+        text: "This is a toast",
+        duration: 3000
+      }).showToast();
+    });
+
+    closePopupButton.addEventListener('click', function() {
+      popup.style.display = 'none';
+    });
+
+    // فتح الرابط عند الضغط على الزر
+    var openGitHubButton = document.getElementById('openGitHubButton');
+    openGitHubButton.addEventListener('click', function() {
+      window.open("https://github.com/IbrahimAliM/pie");
+    });
+
+    var openTwitterButton = document.getElementById('openTwitterButton');
+    openTwitterButton.addEventListener('click', function() {
+      window.open("https://twitter.com");
+    });
+  </script>
+</body>
+</html>
